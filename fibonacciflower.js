@@ -29,6 +29,7 @@ function drawFlower() {
 }
 
 function animate() {
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawFlower();
   if (number > 900) return;
   requestAnimationFrame(animate);
