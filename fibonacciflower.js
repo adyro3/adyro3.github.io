@@ -1,5 +1,7 @@
-const cavas = document.getElementById("canvas1");
+const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
-canvas.width = widows.innerWidth;
-canvas.height = windows.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var s = 6;
