@@ -1,0 +1,16 @@
+git init
+git add . <folder1> <folder2> <etc.>
+git commit -m "Your message about the commit"
+git remote add origin https://github.com/yourUsername/yourRepository.git
+git remote set-url origin https://github.com/your/repository
+git push -u origin master
+git push origin master
+
+
+gid add .
+git add -u
+git rm -r --cached FolderName
+git commit -m "Removed folder from repository"
+git push origin master
+
+Git Cheatsheet: https://gist.github.com/hofmannsven/6814451
