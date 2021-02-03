@@ -1,0 +1,13 @@
+Extensions I use for visual studio code:
+C/C++ intelisense
+ESLint
+HTML CSS Support 
+Jupyter
+Live Server
+Prettier - Code formatter
+Python
+Turbo Console Log
+indent-rainbow
+
+Settings I've changed:
+-
