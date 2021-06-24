@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas1');
-const c = canvas.getContext('2d');
+const canvas = document.getElementById("canvas1");
+const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -93,7 +93,7 @@ class Particle {
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
-const player = new Player(x, y, 20, 'white'); // creating the Player object from the player class
+const player = new Player(x, y, 20, "white"); // creating the Player object from the player class
 
 const projectiles = []; // empty arrays to spawn projectiles, enemies and particles
 const enemies = [];
@@ -126,7 +126,7 @@ function spawnEnmemis() {
 let animationId;
 function animate() {
   animationId = requestAnimationFrame(animate); //looping through animate until stopping when animationId is set to cancelAnimationFrame
-  c.fillStyle = 'rgba(0,0,0,0.1)'; // gets that nice effect due to background
+  c.fillStyle = "rgba(0,0,0,0.1)"; // gets that nice effect due to background
   c.fillRect(0, 0, canvas.width, canvas.height); // clears the background every loop
   player.draw(); // draws player object from draw function in Player class
 
@@ -204,7 +204,7 @@ function animate() {
   });
 }
 
-window.addEventListener('click', (event) => {
+window.addEventListener("click", (event) => {
   //gets x and y of the mouse and creates a new projectile in the arrat that's pushed (with velocity) towards the mouse position
   const angle = Math.atan2(
     // gets angle for velocity
@@ -217,7 +217,7 @@ window.addEventListener('click', (event) => {
     y: Math.sin(angle) * 4,
   };
   projectiles.push(
-    new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', velocity)
+    new Projectile(canvas.width / 2, canvas.height / 2, 5, "red", velocity)
   );
 });
 
