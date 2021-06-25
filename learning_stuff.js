@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas1');
-const c = canvas.getContext('2d');
+const canvas = document.getElementById("canvas1");
+const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -10,13 +10,13 @@ const mouse = {
   click: false,
 };
 
-canvas.addEventListener('mousedown', function (event) {
+canvas.addEventListener("mousedown", function (event) {
   mouse.x = event.x - canvasPosition.left;
   mouse.y = event.y - canvasPosition.top;
   spawnBubbles();
 });
 
-canvas.addEventListener('mouseup', function () {
+canvas.addEventListener("mouseup", function () {
   mouse.click = false;
   coords.x = mouse.x;
   coords.y = mouse.y;
@@ -79,7 +79,7 @@ function spawnBubbles() {
 }
 
 function spawnLines(x, y, x2, y2) {
-  color = 'red';
+  color = "red";
   w = 10;
   lines_array.push(new Line(x, y, x2, y2, w, color));
 }
@@ -99,22 +99,22 @@ function drawLine(x, y, x2, y2) {
   c.beginPath();
   c.moveTo(x, y);
   c.lineTo(x2, y2);
-  c.strokeStyle = 'red';
+  c.strokeStyle = "red";
   c.stroke();
 }
 
 function animate() {
   requestAnimationFrame(animate);
-  c.fillStyle = 'rgba(0,0,0,0.1)';
+  c.fillStyle = "rgba(0,0,0,0.1)";
   // c.fillRect(0, 0, canvas.width, canvas.height);
   bubbles_array.forEach((Bubble, index) => {
-    console.log('spawnLines ~ lines_array', lines_array);
+    console.log("spawnLines ~ lines_array", lines_array);
 
     Bubble.update();
     if (Bubble.isHovered() === true) {
       drawLine(Bubble.x, Bubble.y, coords.x, coords.y);
       getCoords(Bubble.x, Bubble.y);
-      console.log('coords', coords);
+      console.log("coords", coords);
     }
   });
   lines_array.forEach((Line, index) => {

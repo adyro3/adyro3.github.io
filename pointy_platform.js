@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas1');
-const c = canvas.getContext('2d');
+const canvas = document.getElementById("canvas1");
+const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -12,7 +12,7 @@ class Player {
   draw() {
     c.beginPath();
     c.rect(this.x, this.y, 150, 50);
-    c.fillStyle = 'blue';
+    c.fillStyle = "blue";
     c.fill();
   }
 
@@ -30,7 +30,7 @@ class Platform {
   draw() {
     c.beginPath();
     c.rect(this.x, this.y, 150, 50);
-    c.fillStyle = 'blue';
+    c.fillStyle = "blue";
     c.fill();
   }
 
@@ -47,7 +47,7 @@ const player = new Player();
 function makeGround() {
   c.beginPath();
   c.rect(0, canvas.height - 100, canvas.width, 50);
-  c.fillStyle = 'green';
+  c.fillStyle = "green";
   c.fill();
 }
 
@@ -56,14 +56,14 @@ function spawnPlatforms() {
   let x = Math.random() * 1000;
   let y = Math.random() * 1000;
   platforms.push(new Platform(x, y));
-  console.log('//setInterval ~ platforms', platforms);
+  console.log("//setInterval ~ platforms", platforms);
   // }, 1000);
 }
 
 function animate() {
   requestAnimationFrame(animate);
 
-  c.fillStyle = 'rgba(0,0,0,0.1)';
+  c.fillStyle = "rgba(0,0,0,0.1)";
   c.fillRect(0, 0, canvas.width, canvas.height);
   makeGround();
   player.update();

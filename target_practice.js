@@ -1,8 +1,8 @@
-const canvas = document.getElementById('canvas1');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("canvas1");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-canvas.addEventListener('mousedown', doMouseDown, false);
+canvas.addEventListener("mousedown", doMouseDown, false);
 
 let positionX = canvas.width / 2;
 let positionY = canvas.height / 2;
@@ -25,7 +25,7 @@ function doMouseDown() {
 function drawRect() {
   ctx.beginPath();
   ctx.fillRect(positionX, positionY, lungime, inaltime);
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = "red";
   ctx.fill();
   ctx.closePath();
   positionX += dx;

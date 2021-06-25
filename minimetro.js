@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas1');
-const c = canvas.getContext('2d');
+const canvas = document.getElementById("canvas1");
+const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -11,7 +11,7 @@ const mouse = {
   click: false,
 };
 
-canvas.addEventListener('mousedown', function (event) {
+canvas.addEventListener("mousedown", function (event) {
   mouse.x = event.x - canvasPosition.left;
   mouse.y = event.y - canvasPosition.top;
 });
@@ -27,7 +27,7 @@ class Station {
   draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    c.fillStyle = 'blue';
+    c.fillStyle = "blue";
     c.fill();
   }
 
@@ -53,7 +53,7 @@ function spawnStations() {
 
 function animate() {
   requestAnimationFrame(animate);
-  c.fillStyle = 'rgba(0,0,0,0.1)';
+  c.fillStyle = "rgba(0,0,0,0.1)";
   c.fillRect(0, 0, canvas.width, canvas.height);
   stations.forEach((Station) => {
     Station.update();

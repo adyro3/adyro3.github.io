@@ -16,8 +16,8 @@ var mouseState = {
   click: null,
 };
 var gameState = {
-  difficulty: 'easy',
-  screen: 'menu',
+  difficulty: "easy",
+  screen: "menu",
   newBest: false,
   timeTaken: 0,
 
@@ -26,7 +26,7 @@ var gameState = {
 };
 var difficulties = {
   easy: {
-    name: 'Easy',
+    name: "Easy",
     width: 10,
     height: 10,
     mines: 10,
@@ -34,7 +34,7 @@ var difficulties = {
     menuBox: [0, 0],
   },
   medium: {
-    name: 'Medium',
+    name: "Medium",
     width: 12,
     height: 12,
     mines: 20,
@@ -42,7 +42,7 @@ var difficulties = {
     menuBox: [0, 0],
   },
   hard: {
-    name: 'Hard',
+    name: "Hard",
     width: 15,
     height: 15,
     mines: 50,
@@ -56,7 +56,7 @@ function Tile(x, y) {
   this.y = y;
   this.hasMine = false;
   this.danger = 0;
-  this.currentState = 'hidden';
+  this.currentState = "hidden";
 }
 Tile.prototype.calcDanger = function () {
   var cDiff = difficulties[gameState.difficulty];
@@ -78,23 +78,23 @@ Tile.prototype.calcDanger = function () {
   }
 };
 Tile.prototype.flag = function () {
-  if (this.currentState == 'hidden') {
-    this.currentState = 'flagged';
-  } else if (this.currentState == 'flagged') {
-    this.currentState = 'hidden';
+  if (this.currentState == "hidden") {
+    this.currentState = "flagged";
+  } else if (this.currentState == "flagged") {
+    this.currentState = "hidden";
   }
 };
 Tile.prototype.click = function () {
-  if (this.currentState != 'hidden') {
+  if (this.currentState != "hidden") {
     return;
   }
 
   if (this.hasMine) {
     gameOver();
   } else if (this.danger > 0) {
-    this.currentState = 'visible';
+    this.currentState = "visible";
   } else {
-    this.currentState = 'visible';
+    this.currentState = "visible";
     this.revealNeighbours();
   }
 
@@ -115,8 +115,8 @@ Tile.prototype.revealNeighbours = function () {
 
       var idx = py * cDiff.width + px;
 
-      if (grid[idx].currentState == 'hidden') {
-        grid[idx].currentState = 'visible';
+      if (grid[idx].currentState == "hidden") {
+        grid[idx].currentState = "visible";
 
         if (grid[idx].danger == 0) {
           grid[idx].revealNeighbours();
@@ -128,7 +128,7 @@ Tile.prototype.revealNeighbours = function () {
 
 function checkState() {
   for (var i in grid) {
-    if (grid[i].hasMine == false && grid[i].currentState != 'visible') {
+    if (grid[i].hasMine == false && grid[i].currentState != "visible") {
       return;
     }
   }
@@ -141,18 +141,18 @@ function checkState() {
     cDiff.bestTime = gameTime;
   }
 
-  gameState.screen = 'won';
+  gameState.screen = "won";
 }
 
 function gameOver() {
-  gameState.screen = 'lost';
+  gameState.screen = "lost";
 }
 
 function startLevel(diff) {
   gameState.newBest = false;
   gameState.timeTaken = 0;
   gameState.difficulty = diff;
-  gameState.screen = 'playing';
+  gameState.screen = "playing";
 
   gameTime = 0;
   lastFrameTime = 0;
@@ -162,11 +162,11 @@ function startLevel(diff) {
   var cDiff = difficulties[diff];
 
   offsetX = Math.floor(
-    (document.getElementById('game').width - cDiff.width * gameState.tileW) / 2
+    (document.getElementById("game").width - cDiff.width * gameState.tileW) / 2
   );
 
   offsetY = Math.floor(
-    (document.getElementById('game').height - cDiff.height * gameState.tileH) /
+    (document.getElementById("game").height - cDiff.height * gameState.tileH) /
       2
   );
 
@@ -197,7 +197,7 @@ function startLevel(diff) {
 }
 
 function updateGame() {
-  if (gameState.screen == 'menu') {
+  if (gameState.screen == "menu") {
     if (mouseState.click != null) {
       for (var i in difficulties) {
         if (
@@ -210,9 +210,9 @@ function updateGame() {
       }
       mouseState.click = null;
     }
-  } else if (gameState.screen == 'won' || gameState.screen == 'lost') {
+  } else if (gameState.screen == "won" || gameState.screen == "lost") {
     if (mouseState.click != null) {
-      gameState.screen = 'menu';
+      gameState.screen = "menu";
       mouseState.click = null;
     }
   } else {
@@ -236,7 +236,7 @@ function updateGame() {
           grid[tile[1] * cDiff.width + tile[0]].flag();
         }
       } else if (mouseState.click[1] >= 380) {
-        gameState.screen = 'menu';
+        gameState.screen = "menu";
       }
 
       mouseState.click = null;
@@ -245,20 +245,20 @@ function updateGame() {
 }
 
 window.onload = function () {
-  ctx = document.getElementById('game').getContext('2d');
+  ctx = document.getElementById("game").getContext("2d");
 
   // Event listeners
-  document.getElementById('game').addEventListener('click', function (e) {
+  document.getElementById("game").addEventListener("click", function (e) {
     var pos = realPos(e.pageX, e.pageY);
     mouseState.click = [pos[0], pos[1], 1];
   });
-  document.getElementById('game').addEventListener('mousemove', function (e) {
+  document.getElementById("game").addEventListener("mousemove", function (e) {
     var pos = realPos(e.pageX, e.pageY);
     mouseState.x = pos[0];
     mouseState.y = pos[1];
   });
 
-  document.getElementById('game').addEventListener('contextmenu', function (e) {
+  document.getElementById("game").addEventListener("contextmenu", function (e) {
     e.preventDefault();
     var pos = realPos(e.pageX, e.pageY);
     mouseState.click = [pos[0], pos[1], 2];
@@ -269,9 +269,9 @@ window.onload = function () {
 };
 
 function drawMenu() {
-  ctx.textAlign = 'center';
-  ctx.font = 'bold 20pt sans-serif';
-  ctx.fillStyle = '#000000';
+  ctx.textAlign = "center";
+  ctx.font = "bold 20pt sans-serif";
+  ctx.fillStyle = "#000000";
 
   var y = 100;
 
@@ -279,7 +279,7 @@ function drawMenu() {
     var mouseOver = mouseState.y >= y - 20 && mouseState.y <= y + 10;
 
     if (mouseOver) {
-      ctx.fillStyle = '#000099';
+      ctx.fillStyle = "#000099";
     }
 
     difficulties[d].menuBox = [y - 20, y + 10];
@@ -287,25 +287,25 @@ function drawMenu() {
     y += 80;
 
     if (mouseOver) {
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = "#000000";
     }
   }
 
   var y = 120;
-  ctx.font = 'italic 12pt sans-serif';
+  ctx.font = "italic 12pt sans-serif";
 
   for (var d in difficulties) {
     if (difficulties[d].bestTime == 0) {
-      ctx.fillText('No best time', 150, y);
+      ctx.fillText("No best time", 150, y);
     } else {
       var t = difficulties[d].bestTime;
-      var bestTime = '';
+      var bestTime = "";
       if (t / 1000 >= 60) {
-        bestTime = Math.floor(t / 1000 / 60) + ':';
+        bestTime = Math.floor(t / 1000 / 60) + ":";
         t = t % 60000;
       }
-      bestTime += Math.floor(t / 1000) + '.' + (t % 1000);
-      ctx.fillText('Best time   ' + bestTime, 150, y);
+      bestTime += Math.floor(t / 1000) + "." + (t % 1000);
+      ctx.fillText("Best time   " + bestTime, 150, y);
     }
     y += 80;
   }
@@ -317,42 +317,42 @@ function drawPlaying() {
 
   var cDiff = difficulties[gameState.difficulty];
 
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'bottom';
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
 
-  ctx.fillStyle = '#000000';
-  ctx.font = '12px sans-serif';
+  ctx.fillStyle = "#000000";
+  ctx.font = "12px sans-serif";
   ctx.fillText(cDiff.name, 150, 20);
 
-  ctx.fillText('Return to menu', 150, 390);
+  ctx.fillText("Return to menu", 150, 390);
 
-  if (gameState.screen != 'lost') {
-    ctx.textAlign = 'left';
-    ctx.fillText('Mines: ' + cDiff.mines, 10, 40);
+  if (gameState.screen != "lost") {
+    ctx.textAlign = "left";
+    ctx.fillText("Mines: " + cDiff.mines, 10, 40);
 
-    var whichT = gameState.screen == 'won' ? gameState.timeTaken : gameTime;
-    var t = '';
+    var whichT = gameState.screen == "won" ? gameState.timeTaken : gameTime;
+    var t = "";
     if (gameTime / 1000 > 60) {
-      t = Math.floor(whichT / 1000 / 60) + ':';
+      t = Math.floor(whichT / 1000 / 60) + ":";
     }
     var s = Math.floor((whichT / 1000) % 60);
-    t += s > 9 ? s : '0' + s;
+    t += s > 9 ? s : "0" + s;
 
-    ctx.textAlign = 'right';
-    ctx.fillText('Time: ' + t, 290, 40);
+    ctx.textAlign = "right";
+    ctx.fillText("Time: " + t, 290, 40);
   }
 
-  if (gameState.screen == 'lost' || gameState.screen == 'won') {
-    ctx.textAlign = 'center';
-    ctx.font = 'bold 20px sans-serif';
+  if (gameState.screen == "lost" || gameState.screen == "won") {
+    ctx.textAlign = "center";
+    ctx.font = "bold 20px sans-serif";
     ctx.fillText(
-      gameState.screen == 'lost' ? 'Game Over' : 'Cleared!',
+      gameState.screen == "lost" ? "Game Over" : "Cleared!",
       150,
       offsetY - 15
     );
   }
 
-  ctx.strokeStyle = '#999999';
+  ctx.strokeStyle = "#999999";
   ctx.strokeRect(
     offsetX,
     offsetY,
@@ -360,34 +360,34 @@ function drawPlaying() {
     cDiff.height * gameState.tileH
   );
 
-  ctx.font = 'bold 10px monospace';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  ctx.font = "bold 10px monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
   for (var i in grid) {
     var px = offsetX + grid[i].x * gameState.tileW;
     var py = offsetY + grid[i].y * gameState.tileH;
 
-    if (gameState.screen == 'lost' && grid[i].hasMine) {
-      ctx.fillStyle = '#ff0000';
+    if (gameState.screen == "lost" && grid[i].hasMine) {
+      ctx.fillStyle = "#ff0000";
       ctx.fillRect(px, py, gameState.tileW, gameState.tileH);
-      ctx.fillStyle = '#000000';
-      ctx.fillText('x', px + halfW, py + halfH);
-    } else if (grid[i].currentState == 'visible') {
-      ctx.fillStyle = '#dddddd';
+      ctx.fillStyle = "#000000";
+      ctx.fillText("x", px + halfW, py + halfH);
+    } else if (grid[i].currentState == "visible") {
+      ctx.fillStyle = "#dddddd";
 
       if (grid[i].danger) {
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = "#000000";
         ctx.fillText(grid[i].danger, px + halfW, py + halfH);
       }
     } else {
-      ctx.fillStyle = '#cccccc';
+      ctx.fillStyle = "#cccccc";
       ctx.fillRect(px, py, gameState.tileW, gameState.tileH);
       ctx.strokeRect(px, py, gameState.tileW, gameState.tileH);
 
-      if (grid[i].currentState == 'flagged') {
-        ctx.fillStyle = '#0000cc';
-        ctx.fillText('P', px + halfW, py + halfH);
+      if (grid[i].currentState == "flagged") {
+        ctx.fillStyle = "#0000cc";
+        ctx.fillText("P", px + halfW, py + halfH);
       }
     }
   }
@@ -420,20 +420,20 @@ function drawGame() {
   }
 
   // Clear canvas
-  ctx.fillStyle = '#ddddee';
+  ctx.fillStyle = "#ddddee";
   ctx.fillRect(0, 0, 300, 400);
 
-  if (gameState.screen == 'menu') {
+  if (gameState.screen == "menu") {
     drawMenu();
   } else {
     drawPlaying();
   }
 
   // Draw the frame count
-  ctx.textAlign = 'left';
-  ctx.font = '10pt sans-serif';
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Frames: ' + framesLastSecond, 5, 15);
+  ctx.textAlign = "left";
+  ctx.font = "10pt sans-serif";
+  ctx.fillStyle = "#000000";
+  ctx.fillText("Frames: " + framesLastSecond, 5, 15);
 
   // Update the lastFrameTime
   lastFrameTime = currentFrameTime;
@@ -443,7 +443,7 @@ function drawGame() {
 }
 
 function realPos(x, y) {
-  var p = document.getElementById('game');
+  var p = document.getElementById("game");
 
   do {
     x -= p.offsetLeft;
